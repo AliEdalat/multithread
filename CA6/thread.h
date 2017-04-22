@@ -13,10 +13,14 @@ public:
 	bool get_is_finished(){return root_of_functors->get_is_finished();}
 	void set_priority(int number);
 	int get_priority(){return priority;}
+	std::string get_type(){return type;}
+	//Functor* get_root(){return root_of_functors;}
+	virtual void revert_functors_state(){};
 	virtual void do_functor();
 	//~Thread();
 protected:
 	int priority;
+	std::string type;
 	Functor* root_of_functors;
 	
 };

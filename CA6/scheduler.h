@@ -14,6 +14,7 @@ public:
 	//~Scheduler();
 protected:
 	std::vector<Thread*> threads;
+	void remove_completed();
 	
 };
 

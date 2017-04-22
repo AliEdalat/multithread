@@ -3,6 +3,8 @@
 
 #include "scheduler.h"
 #include <algorithm>
+#include <cstdlib>
+#include <ctime>
 
 class Priority_scheduler:public Scheduler
 {

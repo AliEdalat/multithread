@@ -11,6 +11,9 @@ public:
 		children.push_back(second_oprand);
 		is_finished=false;
 	};
+	Multiply():Functor("multiply"){
+		is_finished=false;	
+	}
 	void calculate_result_value();	
 };
 

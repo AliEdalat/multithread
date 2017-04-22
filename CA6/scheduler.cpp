@@ -31,11 +31,27 @@ void Scheduler::do_threads(){
 				//cout<<threads[i]->get_priority()<<endl;
 				threads[i]->do_functor();
 			}
+			this->remove_completed();
 			/*if(threads[i]->get_is_finished()){
 				threads.erase(threads.begin()+i);
 			}
 			*/
 			if(i == (threads.size()-1)){
+				i=-1;
+			}
+		}
+	}
+}
+void Scheduler::remove_completed(){
+	for (int i = 0; i < threads.size(); ++i)
+	{
+		//cout<<"counter remove:"<<i<<endl;
+		if(threads[i]->get_is_finished()){
+			if(threads[i]->get_type() == "recurrent_thread"){
+				threads[i]->revert_functors_state();
+			}else{
+				cout<<threads[i]->get_type()<<endl;
+				threads.erase(threads.begin()+i);
 				i=-1;
 			}
 		}

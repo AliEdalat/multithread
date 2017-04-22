@@ -10,6 +10,9 @@ public:
 		children.push_back(oprand);
 		is_finished=false;
 	}
+	Negative():Functor("negative"){
+		is_finished=false;	
+	}
 	void calculate_result_value();
 };
 

@@ -9,7 +9,8 @@ class Functor
 public:
 	Functor(std::string _functor_type);
 	bool get_is_finished(){return is_finished;}
-	int get_result(){return result_value;}
+	void set_is_finished(bool state){is_finished=state;}
+	double get_result(){return result_value;}
 	std::vector<Functor*> get_children(){return children;}
 	void add_child_to_functor(Functor* child);
 	virtual void calculate_result_value(){}
@@ -20,7 +21,7 @@ private:
 	
 protected:
 	bool is_finished;
-	int result_value;
+	double result_value;
 	std::vector<Functor*> children;
 };
 

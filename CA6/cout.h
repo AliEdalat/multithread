@@ -7,7 +7,13 @@
 class Cout :public Functor
 {
 public:
-	Cout():Functor("cout"){is_finished=false;};
+	Cout(Functor* oprand):Functor("cout"){
+		children.push_back(oprand);
+		is_finished=false;
+	};
+	Cout():Functor("cout"){
+		is_finished=false;
+	}
 	void calculate_result_value();
 };
 

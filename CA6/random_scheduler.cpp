@@ -22,7 +22,9 @@ void Random_scheduler::do_threads(){
 		int index=rand()%size;
 		if(!threads[index]->get_is_finished()){
 			threads[index]->do_functor();
-		}/*else{
+		}
+		this->remove_completed();
+		/*else{
 			threads.erase(threads.begin()+index);
 		}*/
 	}

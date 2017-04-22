@@ -2,8 +2,11 @@
 
 using namespace std;
 
-bool runnable_node(vector<Functor*> funcotrs){
+bool runnable_node(vector<Functor*> funcotrs, string type){
 	if(funcotrs.size() == 0){
+		return true;
+	}
+	if(type == "if" && funcotrs[0]->get_is_finished() && (funcotrs[1]->get_is_finished() || funcotrs[2]->get_is_finished())){
 		return true;
 	}
 	for (int i = 0; i < funcotrs.size(); ++i)
@@ -17,22 +20,38 @@ bool runnable_node(vector<Functor*> funcotrs){
 }
 void complete_small_part(Functor* root,bool& run_first_functor){
 	vector<Functor*> children=root->get_children();
-	if(!runnable_node(children)){
+	string type=root->get_type();
+	if(!runnable_node(children ,type)){
 		for (int i = 0; i < children.size(); ++i)
 		{
+			if(root->get_type() == "if" && children[0]->get_is_finished()){
+				if(children[0]->get_result() == 0 && !children[2]->get_is_finished()){
+					//cout<<"ELSE BRANCH !"<<endl;
+					complete_small_part(children[2],run_first_functor);
+					continue;
+
+				}
+				else if(children[0]->get_result() != 0 && !children[1]->get_is_finished()){
+					//cout<<"IF BRANCH !"<<endl;
+					complete_small_part(children[1],run_first_functor);
+					continue;
+				}else{
+					continue;
+				}				
+			}
 			if(!children[i]->get_is_finished()){
 				//cout<<children[i]->get_type()<<endl;
 				complete_small_part(children[i],run_first_functor);
 			}
 		}
 		
-		if(runnable_node(children) && run_first_functor == false){
+		if(runnable_node(children , type) && run_first_functor == false){
 			root->calculate_result_value();
 			run_first_functor=true;
 			//cout<<root->get_type()<<endl;
 			return;
 		}
-	}else if(runnable_node(children) && run_first_functor == false){
+	}else if(runnable_node(children , type) && run_first_functor == false){
 		root->calculate_result_value();
 		run_first_functor=true;
 		//cout<<root->get_type()<<endl;
@@ -50,9 +69,11 @@ void Thread::do_functor(){
 }
 Thread::Thread(Functor* root){
 	root_of_functors=root;
+	type="basic_thread";
 	priority=0;
 }
 Thread::Thread(){
+	type="basic_thread";
 	priority=0;
 }
 void Thread::set_priority(int number){
