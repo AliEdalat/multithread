@@ -1,0 +1,34 @@
+{
+ threads : [
+	{thread_name : addition ,
+	 thread_type : basic_thread ,
+	 functor : {
+	   functor_type : cout ,
+	   functor_child : [
+	     {
+		functor_type : add ,
+		functor_child : [
+		   { functor_type: cin},
+		   { functor_type: cin}
+		]
+	      }
+	    ]
+	  	}
+	},
+	{thread_name : addition--- ,
+	 thread_type : basic_thread ,
+	 functor : {
+	   functor_type : cout ,
+	   functor_child : [
+	     {
+		functor_type : mul ,
+		functor_child : [
+		   { functor_type: cin},
+		   { functor_type: cin}
+		]
+	      }
+	    ]
+	  	}
+	}
+   ]
+} 

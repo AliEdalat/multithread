@@ -11,6 +11,7 @@
 #include "priority_scheduler.h"
 #include "if_else.h"
 #include "recurrent_thread.h"
+#include "json_reader.h"
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -50,22 +51,7 @@ int main(){
 	Priority_scheduler s(pp);
 	s.do_threads();
 	//c.calculate_result_value();
-	ifstream input;
-	input.open("a.txt");
-	string line;
-	while (std::getline(input, line))
-	{
-	    if(line.find("thread_name") != -1){
-	    	int found=line.find(':');
-	    	string thread_name=line.substr(found+1);
-	 		std::getline(input, line);
-	 		found=line.find(':');
-	 		string thread_type=line.substr(found+1);
-	 		//cout<<thread_type<<endl;
-	 		Thread* t=craete_thraed(thread_type);
-	 		//cout<<t->get_priority()<<endl;   	
-	    }
-	}
+	
 	Cin ehsan;
 	Cin ebi;
 	Cin se;
@@ -86,10 +72,21 @@ int main(){
 	Cout pointer(&point);
 	single_run_thread single(&pointer);
 	std::vector<Thread*> threads_k;
-	threads_k.push_back(&mom);
+	//threads_k.push_back(&mom);
 	threads_k.push_back(&thth);
 	threads_k.push_back(&single);
 	Random_scheduler e_scheduler(threads_k);
 	e_scheduler.do_threads();
+	Json_reader reader("a.json");
+	reader.parse_file();
+	std::vector<Thread*> thereads=reader.get_threads();
+	for (int i = 0; i < thereads.size(); ++i)
+	{
+		cout<<"json :"<< thereads[i]->get_type()<<' '<<thereads[i]->get_priority()<<endl;
+
+	}
+	Scheduler json_sch(thereads);
+	cout<<"Json file reading ...!"<<endl;
+	json_sch.do_threads();
 	return 0;
 }

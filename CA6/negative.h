@@ -13,6 +13,7 @@ public:
 	Negative():Functor("negative"){
 		is_finished=false;	
 	}
+	bool completed_oprands();
 	void calculate_result_value();
 };
 

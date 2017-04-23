@@ -14,6 +14,7 @@ public:
 	void set_priority(int number);
 	int get_priority(){return priority;}
 	std::string get_type(){return type;}
+	void add_root(Functor* _root){root_of_functors=_root;}
 	//Functor* get_root(){return root_of_functors;}
 	virtual void revert_functors_state(){};
 	virtual void do_functor();

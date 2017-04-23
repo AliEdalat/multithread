@@ -15,3 +15,9 @@ void If::calculate_result_value(){
 		}
 	}
 }
+bool If::completed_oprands(){
+	if(children.size() == 3){
+		return true;
+	}
+	return false;
+}

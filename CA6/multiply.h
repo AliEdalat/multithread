@@ -14,6 +14,7 @@ public:
 	Multiply():Functor("multiply"){
 		is_finished=false;	
 	}
+	bool completed_oprands();
 	void calculate_result_value();	
 };
 

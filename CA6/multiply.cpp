@@ -9,3 +9,9 @@ void Multiply::calculate_result_value(){
 		cout<<"MULTIPLY :"<< children[0]->get_result() <<" * "<<children[1]->get_result()<<endl; 
 	}
 }
+bool Multiply::completed_oprands(){
+	if(children.size() == 2){
+		return true;
+	}
+	return false;
+}

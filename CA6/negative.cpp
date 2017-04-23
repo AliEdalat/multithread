@@ -11,3 +11,9 @@ void Negative::calculate_result_value(){
 		cout<<"ERROR IN NEGATIVE NODE!"<<endl;
 	}
 }
+bool Negative::completed_oprands(){
+	if(children.size() == 1){
+		return true;
+	}
+	return false;
+}

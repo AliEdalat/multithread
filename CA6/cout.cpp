@@ -12,3 +12,9 @@ void Cout::calculate_result_value(){
 		cout<<"ERROR IN COUT NODE!"<<endl;
 	}
 }
+bool Cout::completed_oprands(){
+	if(children.size() == 1){
+		return true;
+	}
+	return false;
+}

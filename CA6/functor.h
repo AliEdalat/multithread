@@ -15,6 +15,7 @@ public:
 	void add_child_to_functor(Functor* child);
 	virtual void calculate_result_value(){}
 	std::string get_type(){return functor_type;}
+	virtual bool completed_oprands(){};
 	//~Functor();
 private:
 	std::string functor_type;
