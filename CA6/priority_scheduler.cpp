@@ -29,7 +29,7 @@ void Priority_scheduler::do_threads(){
 	srand(time(0));
 	while(!(scheduler_is_completed(this))){
 		int random_num=rand()%sum;
-		cout<<"RAND :"<<random_num<<endl;
+		//cout<<"RAND :"<<random_num<<endl;
 		int min=0;
 		int max=0;
 		this->remove_completed();

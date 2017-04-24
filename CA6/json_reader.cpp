@@ -32,8 +32,8 @@ void create_functor_tree(vector<Functor*>  functors){
 		for (int i = functors.size()-2; i >=0 ; i--)
 		{
 			if(functors[i]->completed_oprands() == false){
-				cout<<"father :"<<functors[i]->get_type()<<endl;
-				cout<<"child :"<<functors[index]->get_type()<<endl;
+				//cout<<"father :"<<functors[i]->get_type()<<endl;
+				//cout<<"child :"<<functors[index]->get_type()<<endl;
 				functors[i]->add_child_to_functor(functors[index]);
 				break;
 			}
@@ -49,7 +49,6 @@ void Json_reader::parse_file(){
 	string line;
 	bool seen_thraed=false;
 	while(getline(input_file,line)){
-		//string thread_type;
 		if(line.find("thread_type") != -1){
 			for (int i = 0; i < functors.size(); ++i)
 			{
@@ -60,12 +59,8 @@ void Json_reader::parse_file(){
 						cout<<"child :"<<i<<')'<<functors[i]->get_type()<<endl;
 					}
 			}
-			//int find=line.find(':');
-			//thread_type=line.substr(find+1);
-			cout<<"Thread :"<<line<<endl;
-			if(seen_thraed == true){
-			//	create_functor_tree(functors);
-				
+			//cout<<"Thread :"<<line<<endl;
+			if(seen_thraed == true){	
 				threads[threads.size()-1]->add_root(functors[0]);
 				functors.clear();
 				seen_thraed=false;
@@ -75,29 +70,22 @@ void Json_reader::parse_file(){
 		}
 		if(line.find("thread_priority") != -1){
 			int number;
-			std::stringstream stream(line);
-			stream>>number;
+			int find=line.find(':');
+			string temp=line.substr(find+1);
+			std::stringstream stream(temp);
+			stream >> number;
 			threads[threads.size()-1]->set_priority(number);
+			cout<<"PRIORITY :"<<number<<endl;
 		}
 		if(line.find("functor_type") != -1){
-			cout<<"Functor :"<<line<<endl;
+			//cout<<"Functor :"<<line<<endl;
 			functors.push_back(create_functor(line));
 			create_functor_tree(functors);
 		}
 	}
 	if(seen_thraed == true){
-			//	create_functor_tree(functors);
-				for (int i = 0; i < functors.size(); ++i)
-			{	
-					cout<<i<<')'<<functors[i]->get_type()<<endl;
-					std::vector<Functor*> children_op=functors[i]->get_children();
-					for (int j = 0; j < children_op.size(); ++j)
-					{
-						cout<<"child :"<<j<<')'<<functors[j]->get_type()<<endl;
-					}
-			}
-				threads[threads.size()-1]->add_root(functors[0]);
-				functors.clear();
-				seen_thraed=false;
-			}
+		threads[threads.size()-1]->add_root(functors[0]);
+		functors.clear();
+		seen_thraed=false;
+	}
 }

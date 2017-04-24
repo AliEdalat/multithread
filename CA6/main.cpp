@@ -85,7 +85,7 @@ int main(){
 		cout<<"json :"<< thereads[i]->get_type()<<' '<<thereads[i]->get_priority()<<endl;
 
 	}
-	Scheduler json_sch(thereads);
+	Priority_scheduler json_sch(thereads);
 	cout<<"Json file reading ...!"<<endl;
 	json_sch.do_threads();
 	return 0;
