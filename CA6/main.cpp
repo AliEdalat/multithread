@@ -20,7 +20,7 @@ using namespace std;
 
 
 int main(){
-	Cin in;
+	/*Cin in;
 	Cin ine;
 	Cin inee;
 	Cin ip;
@@ -77,6 +77,7 @@ int main(){
 	threads_k.push_back(&single);
 	Random_scheduler e_scheduler(threads_k);
 	e_scheduler.do_threads();
+	*/
 	Json_reader reader("a.json");
 	reader.parse_file();
 	std::vector<Thread*> thereads=reader.get_threads();

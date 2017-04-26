@@ -11,7 +11,7 @@ public:
 	void add_thread(Thread* new_thread);
 	std::vector<Thread*> get_threads(){return threads;}
 	virtual void do_threads();
-	//~Scheduler();
+	~Scheduler();
 protected:
 	std::vector<Thread*> threads;
 	void remove_completed();

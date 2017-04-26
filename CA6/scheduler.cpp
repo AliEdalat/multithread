@@ -26,9 +26,7 @@ void Scheduler::do_threads(){
 	for (int i = 0; i < threads.size(); ++i)
 	{
 		cout<<"COUNTER :"<<i<<endl;
-		//if(!scheduler_is_finished(this)){
 		if(!threads[i]->get_is_finished()){
-			//cout<<threads[i]->get_priority()<<endl;
 			threads[i]->do_functor();
 		}
 		for (int i = 0; i < threads.size(); ++i)
@@ -40,11 +38,6 @@ void Scheduler::do_threads(){
 		{
 			cout<<'	'<<i<<threads[i]->get_type()<<endl;
 		}
-		/*if(threads[i]->get_is_finished()){
-			threads.erase(threads.begin()+i);
-		}
-		*/
-	//}
 		cout<<"SIZE :"<<threads.size()<<endl;
 		if(i >= (threads.size()-1)){
 			i=-1;
@@ -54,23 +47,26 @@ void Scheduler::do_threads(){
 void Scheduler::remove_completed(){
 	for (int i = 0; i < threads.size(); ++i)
 	{
-		//cout<<"counter remove:"<<i<<endl;
 		if(threads[i]->get_is_finished()){
 			if(threads[i]->get_type() == "recurrent_thread"){
 				cout<<"reverted"<<endl;
 				threads[i]->revert_functors_state();
 			}else{
 				cout<<"removed :"<<threads[i]->get_type()<<endl;
+				delete threads[i];
 				threads.erase(threads.begin()+i);
 				i=-1;
 			}
 		}
 	}
 }
-/*Scheduler::~Scheduler(){
+Scheduler::~Scheduler(){
 	cout<<"DELETE SCHEDULER!"<<endl;
-	for (std::vector<Thread*>::iterator it = threads.begin(); it != threads.end(); ++it) {
-    	delete *it;
+	for (int i=0; i<threads.size() ;i++) {
+		cout<<"COUNTER :"<<i<<endl;
+		cout<<i<<" :"<<threads[i]->get_type()<<endl;
+    	delete (threads[i]);
+    	threads.erase(threads.begin()+i);
+    	i=0;
 	}
 }
-*/

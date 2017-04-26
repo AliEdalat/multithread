@@ -24,8 +24,5 @@ void Random_scheduler::do_threads(){
 			threads[index]->do_functor();
 		}
 		this->remove_completed();
-		/*else{
-			threads.erase(threads.begin()+index);
-		}*/
 	}
 }

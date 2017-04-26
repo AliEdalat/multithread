@@ -36,7 +36,6 @@ void Priority_scheduler::do_threads(){
 		for (int i = 0; i < threads.size(); ++i)
 		{
 			max+=threads[i]->get_priority();
-			//cout<<"RANGE :"<<'['<<min<<','<<max<<']'<<endl;
 			if(random_num >= min && random_num < max && !threads[i]->get_is_finished()){
 				cout<<threads[i]->get_priority()<<endl;
 				threads[i]->do_functor();

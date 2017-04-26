@@ -82,7 +82,22 @@ void Thread::set_priority(int number){
 	}
 	priority=number;
 }
-/*Thread::~Thread(){
+void delete_recursive(Functor* root){
+	vector<Functor*> children=root->get_children();
+	if (children.size() != 0)
+	{
+		for (int i = 0; i < children.size(); ++i)
+		{
+			delete_recursive(children[i]);
+		}
+		cout<<root->get_type()<<endl;
+		delete root;
+	}else{
+		cout<<root->get_type()<<endl;
+		delete root;
+	}
+}
+Thread::~Thread(){
 	cout<<"DELETE ROOT OF FUNCTORS!"<<endl;
-	delete root_of_functors;
-}*/
+	delete_recursive(root_of_functors);
+}

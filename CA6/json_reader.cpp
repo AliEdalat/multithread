@@ -32,8 +32,8 @@ void create_functor_tree(vector<Functor*>  functors){
 		for (int i = functors.size()-2; i >=0 ; i--)
 		{
 			if(functors[i]->completed_oprands() == false){
-				//cout<<"father :"<<functors[i]->get_type()<<endl;
-				//cout<<"child :"<<functors[index]->get_type()<<endl;
+				cout<<"father :"<<functors[i]->get_type()<<endl;
+				cout<<"child :"<<functors[index]->get_type()<<endl;
 				functors[i]->add_child_to_functor(functors[index]);
 				break;
 			}

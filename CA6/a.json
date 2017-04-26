@@ -7,15 +7,20 @@
 	   functor_type : cout ,
 	   functor_child : [
 	     {
+	        functor_type : if
+		functor_child : [
+              {
 		functor_type : add ,
 		functor_child : [
 		   { functor_type: cin},
 		   { functor_type: cin}
 		]
-	      }
+	      },
+		{ functor_type: cin},
+		{ functor_type: cin}
+	      
 	    ]
-	  	}
-	},
+	  	},
 	{thread_name : addition--- ,
 	 thread_type : basic_thread ,
 	 thread_priority : 1 ,
