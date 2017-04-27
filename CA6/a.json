@@ -1,7 +1,7 @@
 {
  threads : [
 	{thread_name : addition ,
-	 thread_type : singlerun_thread ,
+	 thread_type : recurrent_thread ,
 	 thread_priority :  13 ,
 	 functor : {
 	   functor_type : cout ,

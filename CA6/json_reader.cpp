@@ -41,6 +41,17 @@ void create_functor_tree(vector<Functor*>  functors){
 	}
 
 }
+void check_functors_tree(Functor* root){
+	vector<Functor*> children=root->get_children();
+	if(root->completed_oprands()){
+		for (int i = 0; i < children.size(); ++i)
+		{
+			check_functors_tree(children[i]);
+		}
+	}else{
+		throw runtime_error("Functors tree is not completed!");
+	}
+}
 Json_reader::Json_reader(string name){
 	input_file.open(name.c_str());
 	
@@ -60,7 +71,8 @@ void Json_reader::parse_file(){
 					}
 			}
 			//cout<<"Thread :"<<line<<endl;
-			if(seen_thraed == true){	
+			if(seen_thraed == true){
+				check_functors_tree(functors[0]);	
 				threads[threads.size()-1]->add_root(functors[0]);
 				functors.clear();
 				seen_thraed=false;
@@ -84,6 +96,7 @@ void Json_reader::parse_file(){
 		}
 	}
 	if(seen_thraed == true){
+		check_functors_tree(functors[0]);
 		threads[threads.size()-1]->add_root(functors[0]);
 		functors.clear();
 		seen_thraed=false;

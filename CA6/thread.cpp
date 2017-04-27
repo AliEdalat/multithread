@@ -46,14 +46,26 @@ void complete_small_part(Functor* root,bool& run_first_functor){
 		}
 		
 		if(runnable_node(children , type) && run_first_functor == false){
-			root->calculate_result_value();
-			run_first_functor=true;
+			try{
+				root->calculate_result_value();
+				run_first_functor=true;
+			}catch(runtime_error error){
+				cout<<"Nodes of functors tree are not completed!"<<endl;
+				cout<<error.what()<<endl;
+				throw runtime_error("Scheduler can not use threads!");
+			}
 			//cout<<root->get_type()<<endl;
 			return;
 		}
 	}else if(runnable_node(children , type) && run_first_functor == false){
-		root->calculate_result_value();
-		run_first_functor=true;
+		try{
+			root->calculate_result_value();
+			run_first_functor=true;
+		}catch(runtime_error error){
+			cout<<"Nodes of functors tree are not completed!"<<endl;
+			cout<<error.what()<<endl;
+			throw runtime_error("Scheduler can not use threads!");
+		}
 		//cout<<root->get_type()<<endl;
 		return;
 	}

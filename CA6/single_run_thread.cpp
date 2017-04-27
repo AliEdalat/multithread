@@ -1,4 +1,5 @@
 #include "single_run_thread.h"
+#include <stdexcept>
 
 using namespace std;
 
@@ -46,12 +47,24 @@ void complete_small_part_single_run(Functor* root){
 		}
 		
 		if(runnable(children,type)){
-			root->calculate_result_value();
+			try{
+				root->calculate_result_value();
+			}catch(runtime_error error){
+				cout<<"Nodes of functors tree are not completed!"<<endl;
+				cout<<error.what()<<endl;
+				throw runtime_error("Scheduler can not use threads!");
+			}
 			//cout<<root->get_type()<<endl;
 			return;
 		}
 	}else{
-		root->calculate_result_value();
+		try{
+			root->calculate_result_value();
+		}catch(runtime_error error){
+			cout<<"Nodes of functors tree are not completed!"<<endl;
+			cout<<error.what()<<endl;
+			throw runtime_error("Scheduler can not use threads!");
+		}
 		//cout<<root->get_type()<<endl;
 		return;
 	}

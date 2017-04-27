@@ -2,7 +2,7 @@
 #define JSON_READER_h
 
 #include <iostream>
-#include "cout.h"
+/*#include "cout.h"
 #include "cin.h"
 #include "add.h"
 #include "multiply.h"
@@ -14,6 +14,8 @@
 #include "priority_scheduler.h"
 #include "if_else.h"
 #include "recurrent_thread.h"
+*/
+#include "multithread.h"
 #include <fstream>
 #include <sstream>
 #include <string>

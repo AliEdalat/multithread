@@ -1,5 +1,5 @@
 #include <iostream>
-#include "cout.h"
+/*#include "cout.h"
 #include "cin.h"
 #include "add.h"
 #include "multiply.h"
@@ -11,6 +11,7 @@
 #include "priority_scheduler.h"
 #include "if_else.h"
 #include "recurrent_thread.h"
+*/
 #include "json_reader.h"
 #include <fstream>
 #include <sstream>
@@ -19,7 +20,7 @@
 using namespace std;
 
 
-int main(){
+int main(int argc, char *argv[]){
 	/*Cin in;
 	Cin ine;
 	Cin inee;
@@ -78,7 +79,10 @@ int main(){
 	Random_scheduler e_scheduler(threads_k);
 	e_scheduler.do_threads();
 	*/
-	Json_reader reader("a.json");
+	cout<<argv[1]<<' '<<argv[2]<<endl;
+	string file_name=argv[1];
+	string scheduler_type=argv[2];
+	Json_reader reader(file_name);
 	reader.parse_file();
 	std::vector<Thread*> thereads=reader.get_threads();
 	for (int i = 0; i < thereads.size(); ++i)
@@ -86,8 +90,16 @@ int main(){
 		cout<<"json :"<< thereads[i]->get_type()<<' '<<thereads[i]->get_priority()<<endl;
 
 	}
-	Priority_scheduler json_sch(thereads);
+	Scheduler* json_sch;
+	if(scheduler_type == "roundrobin"){
+		json_sch = new Scheduler(thereads);
+	}else if(scheduler_type == "random"){
+		json_sch = new Random_scheduler(thereads);
+	}else{
+		json_sch = new Priority_scheduler(thereads);
+	}
 	cout<<"Json file reading ...!"<<endl;
-	json_sch.do_threads();
+	json_sch->do_threads();
+	delete json_sch;
 	return 0;
 }
